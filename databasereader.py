@@ -50,11 +50,12 @@ class User:
 
 class activeUsers:
     users = []
-    def __init__(self):
-        pass
+    def __init__(self,name):
+        self.name = name
     def add_user(self,user):
         self.users.append(user)
-                
+
+activeusers = activeUsers("Main DB")                
 
 
 
@@ -80,14 +81,13 @@ def create_user():
           plant =  select_userdata(surname,"Plant_"+str(i)) 
           if plant != "":
               user.add_plant(plant)  
-        activeUsers.add_user(user)
+        activeusers.add_user(user)
         
         
-
- 
 
        
-    
+  
+  
 
 #def select_wateringtimes():
    #return "plants & respective wateringtime"
