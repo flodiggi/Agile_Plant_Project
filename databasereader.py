@@ -5,22 +5,44 @@
 #%%
 
 
-import numpy as np
+#import numpy as np
 import pandas as pd
 
-plantdb = pd.read_csv("plantdatabase")
+userdb = pd.read_csv("userdatabase.csv")
 
 
-def select_userdata():
+#
+#for .... in plantdb.:
+#    plantname
+#    
+#    database.custome.append{"plant": plantname,}
+
+databasecustom = [{"plant": "Cactus", "watering": 40,"feeding": 1, "picture":"link"}, {"plant": "Cactus2", "watering": 40,"feeding": 1, "picture":"link"}]
+
+#CRON
+
+#find library that allows cron
+
+#search scheduling
+
+
+def select_userdata(surname):
+    for i in userdb["Surname"]:
+        if i == surname:
+            return userdb["Plant_1"]
     
-   return "Full user data"
 
-def select_wateringtimes():
-    
-   return "plants & respective wateringtime"
+#def select_wateringtimes():
+   #return "plants & respective wateringtime"
 
 #Timer:
    
+plantname = 'Cactus'  
+   
+def get_user_plant():
+    for i in databasecustom:
+        if i['plant'] == plantname:
+            return i['watering']
 
 def timer():
     "execute a certain code every x timeframes depending on plant wateringtime"
