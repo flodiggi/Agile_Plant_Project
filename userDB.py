@@ -10,6 +10,9 @@ import pandas as pd
 
 userdb = pd.read_csv("userdatabase.csv")
 userdb = userdb.fillna("")
+plantdatabase = pd.read_csv("plantdb.csv")
+plantdatabase = plantdatabase.fillna("")
+
 
 #
 #for .... in plantdb.:
@@ -17,7 +20,7 @@ userdb = userdb.fillna("")
 #    
 #    database.custome.append{"plant": plantname,}
 
-databasecustom = [{"plant": "Cactus", "watering": 40,"feeding": 1, "picture":"link"}, {"plant": "Cactus2", "watering": 40,"feeding": 1, "picture":"link"}]
+#databasecustom = [{"plant": "Cactus", "watering": 40,"feeding": 1, "picture":"link"}, {"plant": "Cactus2", "watering": 40,"feeding": 1, "picture":"link"}]
 
 #CRON
 
@@ -25,12 +28,14 @@ databasecustom = [{"plant": "Cactus", "watering": 40,"feeding": 1, "picture":"li
 
 #search scheduling
 
+#%%
+
 class Plant:
     def __init__(self,name,watering):
         self.name = name
         self.watering = watering
         
-class PlantDB:
+class PlantDatabase:
     plants = []
     def __init__(self,name):
         self.name = name
@@ -38,6 +43,9 @@ class PlantDB:
     def add_plant(self,plant):
         self.plants.append(plant)
         
+        
+activeplants = PlantDatabase("plantdb")        
+#%%        
                 
 class User:
     plants = []
@@ -57,7 +65,7 @@ class activeUsers:
 
 activeusers = activeUsers("Main DB")                
 
-
+#%%
 
 def select_userdata(surname,key):
     for i in userdb['Surname']:
@@ -70,7 +78,7 @@ def select_userdata(surname,key):
 
 def create_user():
     for surname in userdb['Surname']:
-        for user in activeUsers.users:
+        for user in activeusers.users:
             if surname == user.surname:
                 return None
         name = select_userdata(surname,"Username")
@@ -83,46 +91,27 @@ def create_user():
               user.add_plant(plant)  
         activeusers.add_user(user)
         
-create_user()
-create_user()
-create_user()
-create_user()
+#%%        
         
+def select_plantdata(plantname,key):
+        for i in plantdatabase['Name']:
+            if i == plantname:
+                index = plantdatabase[plantdatabase['Name']==i].index.item()
+                return plantdatabase.loc[index,key]
+            
+def create_plant():
+    for plantname in plantdatabase['Name']:
+        if len(plantname) > 1:
+            for plant in activeplants.plants:
+                if plantname == plant.name:
+                    return None
+            watering = select_plantdata(plantname,"WateringSummer")
+            plant = Plant(plantname,watering)
+            activeplants.add_plant(plant)         
         
-        
 
-       
-  
-  
-
-#def select_wateringtimes():
-   #return "plants & respective wateringtime"
-
-#Timer:
-#   
-#plantname = 'Cactus'  
-#   
-#def get_user_plant():
-#    for i in databasecustom:
-#        if i['plant'] == plantname:
-#            return i['watering']
-#
-#def timer():
-#    "execute a certain code every x timeframes depending on plant wateringtime"
-    
-
-
-
-#Ideas
-    
-#import sched, time
-#s = sched.scheduler(time.time, time.sleep)
-#def do_something(sc): 
-#    print "Doing stuff..."
-#    # do your stuff
-#    s.enter(60, 1, do_something, (sc,))
-#
-#s.enter(60, 1, do_something, (s,))
-#s.run()
-
-
+#%%
+            
+            
+create_user()
+create_plant()            
