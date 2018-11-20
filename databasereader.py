@@ -110,22 +110,7 @@ create_user()
 #def timer():
 #    "execute a certain code every x timeframes depending on plant wateringtime"
     
-#importing cronjob
-#from crontab import CronTab as cron
-#
-#system_cron = cron()
-#
-##to add a new job
-#job  = cron.new(command='/usr/bin/echo')
-#
-## setting the timer
-#job.minute.during(5,50).every(5)
-#job.hour.every(4)
-#job.day.on(4, 5, 6)
-#
-#job.dow.on('SUN')
-#job.month.during('APR', 'NOV')
-#would need to assign it to every user's database for each plant
+
 
 
 #Ideas
