@@ -31,12 +31,14 @@ plantdatabase = plantdatabase.fillna("")
 #%%
 
 class Plant:
-    users = []
     def __init__(self,name,watering):
         self.name = name
         self.watering = watering
+        self.users = []
+        
     def add_user(self,user):
-        self.users.append(user)    
+        #if user not in self.users:
+            self.users.append(user)    
         
 class PlantDatabase:
     plants = []
@@ -57,11 +59,12 @@ activeplants = PlantDatabase("plantdb")
 #%%        
                 
 class User:
-    plants = []
     def __init__(self,name,surname,email,phone):
         self.name = name
         self.surname = surname
         self.phone = phone
+        self.plants = []
+        
     def add_plant(self,plant):
         self.plants.append(plant)
 
@@ -95,11 +98,13 @@ def create_user():
         phone = select_userdata(surname,"Phone")
         user = User(name,surname,email,phone)
         for i in range(1,11):
-          plant =  select_userdata(surname,"Plant_"+str(i)) 
-          if plant != "":
-              plantobject = activeplants.lookup_plant(plant)
-              print(plantobject)
-              user.add_plant(plantobject)
+            plant =  select_userdata(surname,"Plant_"+str(i)) 
+            if plant != "":
+                  plantobject = activeplants.lookup_plant(plant)
+                  if plantobject != None:
+                      user.add_plant(plantobject)
+                      #print(surname + "____" + plantobject.name)
+                      plantobject.add_user(user)
         activeusers.add_user(user)
         
             
