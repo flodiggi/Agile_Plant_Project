@@ -50,11 +50,12 @@ class User:
 
 class activeUsers:
     users = []
-    def __init__(self):
-        pass
+    def __init__(self,name):
+        self.name = name
     def add_user(self,user):
         self.users.append(user)
-                
+
+activeusers = activeUsers("Main DB")                
 
 
 
@@ -80,29 +81,34 @@ def create_user():
           plant =  select_userdata(surname,"Plant_"+str(i)) 
           if plant != "":
               user.add_plant(plant)  
-        activeUsers.add_user(user)
+        activeusers.add_user(user)
+        
+create_user()
+create_user()
+create_user()
+create_user()
         
         
-
- 
+        
 
        
-    
+  
+  
 
 #def select_wateringtimes():
    #return "plants & respective wateringtime"
 
 #Timer:
-   
-plantname = 'Cactus'  
-   
-def get_user_plant():
-    for i in databasecustom:
-        if i['plant'] == plantname:
-            return i['watering']
-
-def timer():
-    "execute a certain code every x timeframes depending on plant wateringtime"
+#   
+#plantname = 'Cactus'  
+#   
+#def get_user_plant():
+#    for i in databasecustom:
+#        if i['plant'] == plantname:
+#            return i['watering']
+#
+#def timer():
+#    "execute a certain code every x timeframes depending on plant wateringtime"
     
 #importing cronjob
 #from crontab import CronTab as cron
