@@ -5,8 +5,10 @@
 #%%
 
 
-#import numpy as np
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 userdb = pd.read_csv("userdatabase.csv")
 userdb = userdb.fillna("")
@@ -103,7 +105,6 @@ def create_user():
                   plantobject = activeplants.lookup_plant(plant)
                   if plantobject != None:
                       user.add_plant(plantobject)
-                      #print(surname + "____" + plantobject.name)
                       plantobject.add_user(user)
         activeusers.add_user(user)
         
@@ -125,10 +126,39 @@ def create_plant():
                     return None
             watering = select_plantdata(plantname,"WateringSummer")
             plant = Plant(plantname,watering)
-            activeplants.add_plant(plant)         
-        
+            activeplants.add_plant(plant) 
+#%%
+            
+def show_graph_x(username):
+     plants= []
+     for i in activeusers.users:
+         if i.surname == username:
+             for x in i.plants:
+                 plants.append(x.name)
+     return plants
+ 
+def show_graph_y(username):
+     plants= []
+     for i in activeusers.users:
+         if i.surname == username:
+             for x in i.plants:
+                 plants.append(x.watering)
+     return plants       
+    
+                     
 
 #%%
             
 create_plant()                                 
 create_user()
+
+
+plt.bar(show_graph_x("Bernard"),show_graph_y("Bernard"))
+plt.ylabel('Watering time in Hours')
+plt.title("Watering frequency for Plants of Florian Diegruber")
+
+
+
+
+
+
